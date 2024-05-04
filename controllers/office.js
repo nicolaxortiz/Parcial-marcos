@@ -1,6 +1,24 @@
 import { office } from "../models/office.js";
 
 export const officeController = {
+getAll: async (req,res) => {
+    try{
+      const oficinas = await office.find()
+    if (oficinas.length === 0) {
+        res
+          .status(404)
+          .json({ message: "No se encontraron oficinas"});
+      } else {
+        res.status(200).json(oficinas);
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: "Hubo un error al obtener las oficinas",
+        error: error.message,
+      });
+    }
+  },
+  
   createOffice: async (req, res) => {
     try {
       const newOffice = new office(req.body);
