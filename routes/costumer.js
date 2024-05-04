@@ -6,6 +6,7 @@ import { costumerValidation } from "../validation/costumer.js";
 
 export const costumerRouter = express.Router();
 
+costumerRouter.get("/getAll", costumerValidation.getAll);
 costumerRouter.post(
   "/createCostumer",
   [
