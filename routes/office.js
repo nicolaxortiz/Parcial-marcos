@@ -6,6 +6,8 @@ import { officeValidation } from "../validation/office.js";
 
 export const officeRouter = express.Router();
 
+officeRouter.get("/getAll", officeController.getAll);
+
 officeRouter.post(
   "/createOffice",
   [
