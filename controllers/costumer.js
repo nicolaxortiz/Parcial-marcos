@@ -1,6 +1,24 @@
 import { costumer } from "../models/costumer.js";
 
 export const costumerController = {
+   getAll: async (req,res) => {
+    try{
+      const clientes = await costumer.find()
+    if (clientes.length === 0) {
+        res
+          .status(404)
+          .json({ message: "No se encontraron clientes"});
+      } else {
+        res.status(200).json(clientes);
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: "Hubo un error al obtener los clientes",
+        error: error.message,
+      });
+    }
+  },
+  
   createCostumer: async (req, res) => {
     try {
       const newCostumer = new costumer(req.body);

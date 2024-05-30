@@ -6,6 +6,24 @@ import { apartment } from "../models/apartment.js";
 import { office } from "../models/office.js";
 
 export const propertyController = {
+
+  getAll: async (req,res) => {
+    try{
+      const inmuebles = await property.find()
+    if (inmuebles.length === 0) {
+        res
+          .status(404)
+          .json({ message: "No se encontraron inmuebles"});
+      } else {
+        res.status(200).json(inmuebles);
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: "Hubo un error al obtener los inmuebles",
+        error: error.message,
+      });
+    }
+  },
   getByFilter: async (req, res) => {
     const { filter } = req.params;
 

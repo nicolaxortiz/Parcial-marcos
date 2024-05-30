@@ -13,6 +13,11 @@ propertyRouter.get(
 );
 
 propertyRouter.get(
+  "/getAll",
+  propertyController.getAll
+);
+
+propertyRouter.get(
   "/getByReference/:reference",
   [
     check("reference").custom(propertyValidation.referenceValidator),
