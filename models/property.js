@@ -15,7 +15,7 @@ const PropertySchema = new Schema({
     name: { type: String, required: true },
     cellphone: { type: Number, required: true },
   },
-  office: { type: Schema.Types.ObjectId, ref: "Office" },
+  office: { type: Schema.Types.ObjectId, ref: "Office", required: true },
   visits: [
     {
       costumerId: {

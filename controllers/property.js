@@ -3,13 +3,18 @@ import { villa } from "../models/villa.js";
 import { house } from "../models/house.js";
 import { premises } from "../models/premises.js";
 import { apartment } from "../models/apartment.js";
+import { office } from "../models/office.js";
 
 export const propertyController = {
   getByFilter: async (req, res) => {
     const { filter } = req.params;
 
     try {
-      const inmuebles = await property.find({ offerMode: filter });
+      const inmuebles = await property
+        .find({ offerMode: filter })
+        .populate("office")
+        .populate("visits.costumerId")
+        .exec();
       if (inmuebles.length === 0) {
         res
           .status(404)
@@ -28,7 +33,11 @@ export const propertyController = {
   getByReference: async (req, res) => {
     const { reference } = req.params;
     try {
-      const inmueble = await property.find({ reference: reference });
+      const inmueble = await property
+        .findOne({ reference: reference })
+        .populate("office")
+        .populate("visits.costumerId")
+        .exec();
       if (inmueble.length === 0) {
         res.status(404).json({
           message:
