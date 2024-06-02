@@ -16,18 +16,6 @@ const PropertySchema = new Schema({
     cellphone: { type: Number, required: true },
   },
   office: { type: Schema.Types.ObjectId, ref: "Office", required: true },
-  visits: [
-    {
-      costumerId: {
-        type: Schema.Types.ObjectId,
-        ref: "Costumer",
-        required: true,
-      },
-      date: { type: String, required: true },
-      hour: { type: String, required: true },
-      comment: { type: String, required: true },
-    },
-  ],
 });
 
 export const property = mongoose.model("Property", PropertySchema);

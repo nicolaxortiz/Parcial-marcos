@@ -63,11 +63,11 @@ export const propertyValidation = {
   },
 
   visitValidator: async (visits = "") => {
-    if (!fechaRegex.test(visits[0]?.date)) {
+    if (visits.length > 0 && !fechaRegex.test(visits[0]?.date)) {
       throw new Error("La fecha no cumple con el formato dd/mm/aaaa");
     }
 
-    if (!horaRegex.test(visits[0]?.hour)) {
+    if (visits.length > 0 && !horaRegex.test(visits[0]?.hour)) {
       throw new Error("La hora no cumple con el formato hh:mm");
     }
   },
