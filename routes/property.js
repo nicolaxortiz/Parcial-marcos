@@ -3,20 +3,26 @@ import { propertyController } from "../controllers/property.js";
 import { check } from "express-validator";
 import { validation } from "../middlewares/validar.js";
 import { propertyValidation } from "../validation/property.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 export const propertyRouter = express.Router();
 
 propertyRouter.get(
   "/getByFilter/:filter",
-  [check("filter").custom(propertyValidation.filterValidator), validation],
+  [
+    validarJWT,
+    check("filter").custom(propertyValidation.filterValidator),
+    validation,
+  ],
   propertyController.getByFilter
 );
 
-propertyRouter.get("/getAll", propertyController.getAll);
+propertyRouter.get("/getAll", validarJWT, propertyController.getAll);
 
 propertyRouter.get(
   "/getByReference/:reference",
   [
+    validarJWT,
     check("reference").custom(propertyValidation.referenceValidator),
     validation,
   ],
@@ -25,7 +31,9 @@ propertyRouter.get(
 
 propertyRouter.post(
   "/createVilla",
+
   [
+    validarJWT,
     check("reference").custom(propertyValidation.referenceValidator),
     check("type").custom(propertyValidation.typeValidator),
     check("area").custom(propertyValidation.areaValidator),
@@ -47,6 +55,7 @@ propertyRouter.post(
 propertyRouter.post(
   "/createApartment",
   [
+    validarJWT,
     check("reference").custom(propertyValidation.referenceValidator),
     check("type").custom(propertyValidation.typeValidator),
     check("area").custom(propertyValidation.areaValidator),
@@ -67,6 +76,7 @@ propertyRouter.post(
 propertyRouter.post(
   "/createHouse",
   [
+    validarJWT,
     check("reference").custom(propertyValidation.referenceValidator),
     check("type").custom(propertyValidation.typeValidator),
     check("area").custom(propertyValidation.areaValidator),
@@ -87,6 +97,7 @@ propertyRouter.post(
 propertyRouter.post(
   "/createPremises",
   [
+    validarJWT,
     check("reference").custom(propertyValidation.referenceValidator),
     check("type").custom(propertyValidation.typeValidator),
     check("area").custom(propertyValidation.areaValidator),

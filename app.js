@@ -5,6 +5,8 @@ import { propertyRouter } from "./routes/property.js";
 import { officeRouter } from "./routes/office.js";
 import { costumerRouter } from "./routes/costumer.js";
 import { visitsRouter } from "./routes/visits.js";
+import { authRouter } from "./routes/auth.js";
+import { userRouter } from "./routes/user.js";
 
 const db = connectDB();
 const app = express();
@@ -32,6 +34,8 @@ app.use("/api/v1/property", propertyRouter);
 app.use("/api/v1/office", officeRouter);
 app.use("/api/v1/costumer", costumerRouter);
 app.use("/api/v1/visits", visitsRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/login", authRouter);
 
 app.listen(port, () => {
   console.log("servidor funcionando en el puerto " + port);
