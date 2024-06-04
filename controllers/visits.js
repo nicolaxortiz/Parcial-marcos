@@ -24,7 +24,9 @@ export const visitsController = {
   getVisitsByProperty: async (req, res) => {
     try {
       const { id } = req.params;
-      const visits = await visit.find({ propertyId: id });
+      const visits = await visit
+        .find({ propertyId: id })
+        .populate("costumerId");
 
       if (visits.length === 0) {
         return res
