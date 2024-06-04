@@ -12,10 +12,7 @@ propertyRouter.get(
   propertyController.getByFilter
 );
 
-propertyRouter.get(
-  "/getAll",
-  propertyController.getAll
-);
+propertyRouter.get("/getAll", propertyController.getAll);
 
 propertyRouter.get(
   "/getByReference/:reference",
@@ -102,14 +99,4 @@ propertyRouter.post(
     validation,
   ],
   propertyController.createPremises
-);
-
-propertyRouter.put(
-  "/updateProperty/:reference",
-  [
-    check("reference").custom(propertyValidation.referenceValidator),
-    check("visits").custom(propertyValidation.visitValidator),
-    validation,
-  ],
-  propertyController.updateProperty
 );

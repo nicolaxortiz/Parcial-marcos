@@ -124,34 +124,4 @@ export const propertyController = {
       });
     }
   },
-
-  updateProperty: async (req, res) => {
-    let { reference } = req.params;
-    let updateObject = req.body;
-    try {
-      let propertyToUpdate = await property.findOne({ reference: reference });
-      if (!propertyToUpdate) {
-        return res.status(404).json({
-          message:
-            "No se encontró ningún inmueble con ese número de referencia",
-        });
-      }
-
-      const { visits, ...otherFieldsToUpdate } = updateObject;
-      Object.assign(propertyToUpdate, otherFieldsToUpdate);
-
-      if (visits && visits.length > 0) {
-        propertyToUpdate.visits.push(...visits);
-      }
-
-      const update = await propertyToUpdate.save();
-
-      res.status(200).json(update);
-    } catch (error) {
-      res.status(500).json({
-        message: "Hubo un error al obtener los inmuebles",
-        error: error.message,
-      });
-    }
-  },
 };
