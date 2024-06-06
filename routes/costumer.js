@@ -3,10 +3,11 @@ import { costumerController } from "../controllers/costumer.js";
 import { check } from "express-validator";
 import { validation } from "../middlewares/validar.js";
 import { costumerValidation } from "../validation/costumer.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
 
 export const costumerRouter = express.Router();
 
-costumerRouter.get("/getAll", costumerController.getAll);
+costumerRouter.get("/getAll", [validarJWT], costumerController.getAll);
 costumerRouter.post(
   "/createCostumer",
   [
