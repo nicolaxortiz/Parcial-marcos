@@ -17,7 +17,7 @@ propertyRouter.get(
   propertyController.getByFilter
 );
 
-propertyRouter.get("/getAll", validarJWT, propertyController.getAll);
+propertyRouter.get("/getAll", [validarJWT], propertyController.getAll);
 
 propertyRouter.get(
   "/getByReference/:reference",
