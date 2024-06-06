@@ -41,6 +41,7 @@ export const login = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       msg: "Hable con el administrador",
+      error: error,
     });
   }
 };
